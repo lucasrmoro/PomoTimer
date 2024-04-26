@@ -1,4 +1,4 @@
-package br.com.lucas.pomotimer
+package br.com.lucas.pomotimer.features.main.presentation.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

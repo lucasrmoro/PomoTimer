@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/medium_dimen" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/medium_dimen" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/biggest_dimen" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/biggest_dimen" />
+
+    <ImageButton
+        android:id="@+id/btnDoNotDisturb"
+        android:layout_width="@dimen/biggest_dimen"
+        android:layout_height="@dimen/biggest_dimen"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="@dimen/tiny_dimen"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_moon"
+        app:layout_constraintEnd_toStartOf="@id/btnRingtones"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop"
+        app:tint="?attr/colorOnSurface" />
+
+    <ImageButton
+        android:id="@+id/btnRingtones"
+        android:layout_width="@dimen/biggest_dimen"
+        android:layout_height="@dimen/biggest_dimen"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/ringtones"
+        android:src="@drawable/ic_music_note"
+        app:layout_constraintEnd_toStartOf="@id/btnTimerSettings"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/btnDoNotDisturb"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop"
+        app:tint="?attr/colorOnSurface" />
+
+    <ImageButton
+        android:id="@+id/btnTimerSettings"
+        android:layout_width="@dimen/biggest_dimen"
+        android:layout_height="@dimen/biggest_dimen"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/timer_settings"
+        android:padding="@dimen/tiny_dimen"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_tune"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toEndOf="@id/btnRingtones"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop"
+        app:tint="?attr/colorOnSurface" />
+
+    <br.com.lucas.pomotimer.features.main.presentation.component.ComponentRoundedTimer
+        android:id="@+id/componentRoundedTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/btnStartStop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnRingtones" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/btnStartStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_play"
+        android:text="@string/start"
+        app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
+        app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

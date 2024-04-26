@@ -40,8 +40,10 @@ android {
 }
 
 dependencies {
-
     implementation(libs.core.ktx)
+    implementation(libs.viewmodel.ktx)
+    implementation(libs.navigation.ui.ktx)
+    implementation(libs.navigation.fragment.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
