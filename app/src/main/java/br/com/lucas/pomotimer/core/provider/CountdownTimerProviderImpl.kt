@@ -32,14 +32,13 @@ class CountdownTimerProviderImpl : CountdownTimerProvider {
         reset()
         job = CoroutineScope(Dispatchers.Default).launch {
             (durationInMillis.millisToSeconds() downTo Long.ZERO).onEach {
-                if (it.shouldFinish()) {
-                    reset()
-                    _onTimeUpdated.emit(FINISHED)
-                    return@launch
-                }
                 _onTimeUpdated.emit(RUNNING(remainingTimeInMillis, durationInMillis))
                 remainingTimeInMillis -= intervalInMillis
                 delay(intervalInMillis)
+                if (it.shouldFinish()) {
+                    reset()
+                    _onTimeUpdated.emit(FINISHED)
+                }
             }
         }
     }
