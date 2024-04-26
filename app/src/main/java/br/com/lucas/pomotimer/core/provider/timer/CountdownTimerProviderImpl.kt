@@ -1,11 +1,11 @@
-package br.com.lucas.pomotimer.core.provider
+package br.com.lucas.pomotimer.core.provider.timer
 
 import br.com.lucas.pomotimer.core.extensions.ZERO
 import br.com.lucas.pomotimer.core.extensions.millisToSeconds
-import br.com.lucas.pomotimer.core.provider.CountdownTimerProvider.Status
-import br.com.lucas.pomotimer.core.provider.CountdownTimerProvider.Status.FINISHED
-import br.com.lucas.pomotimer.core.provider.CountdownTimerProvider.Status.RUNNING
-import br.com.lucas.pomotimer.core.provider.CountdownTimerProvider.Status.STOPPED
+import br.com.lucas.pomotimer.core.provider.timer.CountdownTimerProvider.Status
+import br.com.lucas.pomotimer.core.provider.timer.CountdownTimerProvider.Status.FINISHED
+import br.com.lucas.pomotimer.core.provider.timer.CountdownTimerProvider.Status.RUNNING
+import br.com.lucas.pomotimer.core.provider.timer.CountdownTimerProvider.Status.STOPPED
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

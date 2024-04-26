@@ -2,6 +2,7 @@
 <resources>
     <dimen name="tiniest_dimen">4dp</dimen>
     <dimen name="tiny_dimen">8dp</dimen>
+    <dimen name="small_dimen">12dp</dimen>
     <dimen name="medium_dimen">24dp</dimen>
     <dimen name="biggest_dimen">48dp</dimen>
 

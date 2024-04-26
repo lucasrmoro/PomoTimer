@@ -1,4 +1,4 @@
-package br.com.lucas.pomotimer.core.provider
+package br.com.lucas.pomotimer.core.provider.timer
 
 import br.com.lucas.pomotimer.core.extensions.ONE_SECOND_IN_MILLIS
 import kotlinx.coroutines.flow.StateFlow

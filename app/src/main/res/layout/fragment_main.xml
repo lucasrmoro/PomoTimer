@@ -2,8 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStart"
@@ -38,9 +37,9 @@
         android:layout_width="@dimen/biggest_dimen"
         android:layout_height="@dimen/biggest_dimen"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="@dimen/tiny_dimen"
+        android:padding="@dimen/small_dimen"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_moon"
+        android:src="@drawable/ic_do_not_disturb_off"
         app:layout_constraintEnd_toStartOf="@id/btnRingtones"
         app:layout_constraintStart_toStartOf="@id/guidelineStart"
         app:layout_constraintTop_toTopOf="@id/guidelineTop"
@@ -86,8 +85,8 @@
         android:id="@+id/btnStartStop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:icon="@drawable/ic_play"
         android:text="@string/start"
+        app:icon="@drawable/ic_play"
         app:layout_constraintBottom_toBottomOf="@id/guidelineBottom"
         app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
         app:layout_constraintStart_toStartOf="@id/guidelineStart" />

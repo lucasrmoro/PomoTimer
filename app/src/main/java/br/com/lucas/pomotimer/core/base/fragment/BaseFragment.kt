@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
 import java.lang.reflect.ParameterizedType
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModelForClass
 
@@ -61,10 +62,10 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         }
     }
 
-    protected fun withViewModel(block: suspend VM.() -> Unit) {
+    protected fun <T> StateFlow<T>.collectLifecycleAware(block: T.() -> Unit) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                block(viewModel)
+                collect(block)
             }
         }
     }
