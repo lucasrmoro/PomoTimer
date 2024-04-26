@@ -13,7 +13,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.Single
 
+@Single
 class CountdownTimerProviderImpl : CountdownTimerProvider {
 
     private val _onTimeUpdated = MutableStateFlow<Status>(STOPPED)

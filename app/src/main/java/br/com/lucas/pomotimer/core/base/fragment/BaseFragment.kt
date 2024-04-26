@@ -10,12 +10,12 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
 import java.lang.reflect.ParameterizedType
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModelForClass
 
 abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> VB,
@@ -25,9 +25,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     protected val binding
         get() = _binding ?: throw IllegalArgumentException("ViewBiding not found")
 
-    private var _viewModel: VM? = null
-    protected val viewModel: VM
-        get() = _viewModel ?: throw IllegalArgumentException("ViewModel not found")
+    protected val viewModel by viewModelForClass(clazz = getViewModelClass())
 
     @CallSuper
     override fun onCreateView(
@@ -36,7 +34,6 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         savedInstanceState: Bundle?
     ): View? {
         _binding = inflater(inflater, container, false)
-        _viewModel = ViewModelProvider(this)[getViewModelClass()]
         return binding.root
     }
 
@@ -77,6 +74,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
         .actualTypeArguments
         .firstOrNull { it is Class<*> && ViewModel::class.java.isAssignableFrom(it) }
         ?.let { it as Class<VM> }
+        ?.kotlin
         ?: throw IllegalStateException("ViewModel class not found")
 
 }

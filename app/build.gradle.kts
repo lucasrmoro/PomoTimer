@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -37,6 +38,18 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    kotlin {
+        sourceSets.main {
+            kotlin.srcDir("build/generated/ksp/main/kotlin")
+        }
+        sourceSets.test {
+            kotlin.srcDir("build/generated/ksp/test/kotlin")
+        }
+    }
+}
+
+ksp {
+    arg("KOIN_CONFIG_CHECK", "true")
 }
 
 dependencies {
@@ -47,6 +60,10 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+    implementation(libs.koin.annotations)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
+    ksp(libs.koin.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -1,17 +1,14 @@
 package br.com.lucas.pomotimer.features.main.presentation.viewModel
 
 import br.com.lucas.pomotimer.core.base.viewModel.BaseViewModel
-import br.com.lucas.pomotimer.core.extensions.FIVE_MINUTES_IN_MILLIS
-import br.com.lucas.pomotimer.core.extensions.ONE_MINUTE_IN_MILLIS
-import br.com.lucas.pomotimer.core.extensions.TWENTY_FIVE_MINUTES_IN_MILLIS
 import br.com.lucas.pomotimer.core.provider.CountdownTimerProvider
 import br.com.lucas.pomotimer.core.provider.CountdownTimerProvider.Status
 import br.com.lucas.pomotimer.core.provider.CountdownTimerProvider.Status.FINISHED
-import br.com.lucas.pomotimer.core.provider.CountdownTimerProviderImpl
-import kotlinx.coroutines.flow.collect
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class MainViewModel(
-    private val countdownTimerProvider: CountdownTimerProvider = CountdownTimerProviderImpl()
+    private val countdownTimerProvider: CountdownTimerProvider
 ) : BaseViewModel() {
 
     val workTimeDurationInMillis = 10000L
