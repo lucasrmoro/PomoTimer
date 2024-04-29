@@ -86,5 +86,10 @@ class MainFragment :
             return
         }
         context?.setDoNotDisturbMode(!context.isDoNoDisturbModeEnabled())
+        binding.btnDoNotDisturb.contentDescription =
+            (R.string.disable_do_not_disturb_mode.takeIf { context.isDoNotDisturbModePermissionGranted() }
+                ?: R.string.enable_do_not_disturb_mode).run {
+                getString(this)
+            }
     }
 }

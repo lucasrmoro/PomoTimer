@@ -4,6 +4,8 @@
     <!-- Main Screen -->
     <string name="ringtones">Ringtones</string>
     <string name="timer_settings">Timer settings</string>
+    <string name="enable_do_not_disturb_mode">Enable do not disturb mode</string>
+    <string name="disable_do_not_disturb_mode">Disable do not disturb mode</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
 
