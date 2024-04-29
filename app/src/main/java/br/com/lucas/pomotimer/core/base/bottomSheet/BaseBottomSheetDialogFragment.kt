@@ -72,6 +72,10 @@ abstract class BaseBottomSheetDialogFragment<VB : ViewBinding>(
     }
 
     private fun setupBehavior() = bottomSheetBehavior?.run {
+        BottomSheetBehavior.from(binding.llContent).apply {
+            isDraggable = false
+            state = BottomSheetBehavior.STATE_EXPANDED
+        }
         peekHeight = bottomSheetPeekHeight
         setNestedScrollViewBottomPadding()
         addBottomSheetCallback(object :
