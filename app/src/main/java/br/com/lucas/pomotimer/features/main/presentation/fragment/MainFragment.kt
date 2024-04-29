@@ -11,8 +11,10 @@ import br.com.lucas.pomotimer.core.extensions.isDoNoDisturbModeEnabled
 import br.com.lucas.pomotimer.core.extensions.isDoNotDisturbModePermissionGranted
 import br.com.lucas.pomotimer.core.extensions.setAnimatedVectorDrawable
 import br.com.lucas.pomotimer.core.extensions.setDoNotDisturbMode
+import br.com.lucas.pomotimer.core.extensions.showBottomSheet
 import br.com.lucas.pomotimer.core.provider.timer.CountdownTimerProvider.Status
 import br.com.lucas.pomotimer.databinding.FragmentMainBinding
+import br.com.lucas.pomotimer.features.main.presentation.component.BottomSheetRingtones
 import br.com.lucas.pomotimer.features.main.presentation.viewModel.MainViewModel
 
 class MainFragment :
@@ -32,6 +34,9 @@ class MainFragment :
     override fun setupListeners() = with(binding) {
         btnDoNotDisturb.setOnClickListener {
             toggleDoNotDisturbMode(true)
+        }
+        btnRingtones.setOnClickListener {
+            showBottomSheet(BottomSheetRingtones())
         }
         btnStartStop.setOnClickListener {
             viewModel.startOrStopTimer()
