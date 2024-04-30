@@ -2,9 +2,11 @@ package br.com.lucas.pomotimer.features.main.presentation.fragment
 
 import android.content.Intent
 import android.provider.Settings
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.lifecycle.lifecycleScope
 import br.com.lucas.pomotimer.R
 import br.com.lucas.pomotimer.core.base.fragment.BaseFragment
 import br.com.lucas.pomotimer.core.extensions.isDoNoDisturbModeEnabled
@@ -14,12 +16,15 @@ import br.com.lucas.pomotimer.core.extensions.setDoNotDisturbMode
 import br.com.lucas.pomotimer.core.extensions.showBottomSheet
 import br.com.lucas.pomotimer.core.provider.timer.CountdownTimerProvider.Status
 import br.com.lucas.pomotimer.databinding.FragmentMainBinding
+import br.com.lucas.pomotimer.features.main.domain.AlarmTone
 import br.com.lucas.pomotimer.features.main.presentation.component.BottomSheetRingtones
 import br.com.lucas.pomotimer.features.main.presentation.viewModel.MainViewModel
+import br.com.lucas.pomotimer.uikit.adapter.viewholder.alarmTone.VhAlarmToneCallbacks
 
 class MainFragment :
     BaseFragment<FragmentMainBinding, MainViewModel>(FragmentMainBinding::inflate) {
 
+    private val alarmTonesBottomSheet = BottomSheetRingtones(getAlarmTonesAdapterCallbacks())
     private val doNotDisturbPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             toggleDoNotDisturbMode(false)
@@ -36,7 +41,8 @@ class MainFragment :
             toggleDoNotDisturbMode(true)
         }
         btnRingtones.setOnClickListener {
-            showBottomSheet(BottomSheetRingtones())
+            viewModel.getAlarmTones()
+            showBottomSheet(alarmTonesBottomSheet)
         }
         btnStartStop.setOnClickListener {
             viewModel.startOrStopTimer()
@@ -62,11 +68,13 @@ class MainFragment :
                 else -> {}
             }
         }
-
         onDoNotDisturbChange.collectLifecycleAware {
             binding.btnDoNotDisturb.setImageResource(
                 if (this) R.drawable.ic_do_not_disturb_on else R.drawable.ic_do_not_disturb_off
             )
+        }
+        onGetAlarmTones.collectLifecycleAware(alarmTonesBottomSheet.lifecycleScope) {
+            alarmTonesBottomSheet.submitList(this)
         }
     }
 
@@ -86,10 +94,21 @@ class MainFragment :
             return
         }
         context?.setDoNotDisturbMode(!context.isDoNoDisturbModeEnabled())
-        binding.btnDoNotDisturb.contentDescription =
-            (R.string.disable_do_not_disturb_mode.takeIf { context.isDoNotDisturbModePermissionGranted() }
-                ?: R.string.enable_do_not_disturb_mode).run {
-                getString(this)
-            }
+        binding.btnDoNotDisturb.contentDescription = getString(
+            R.string.disable_do_not_disturb_mode.takeIf {
+                context.isDoNotDisturbModePermissionGranted()
+            } ?: R.string.enable_do_not_disturb_mode
+        )
     }
+
+    private fun getAlarmTonesAdapterCallbacks(): VhAlarmToneCallbacks =
+        object : VhAlarmToneCallbacks {
+            override fun onSelect(item: AlarmTone) {
+                viewModel.onSelectAlarmTone(item)
+            }
+
+            override fun onPlayStop(item: AlarmTone) {
+                Log.d("TAG", "onPlayStop: $item")
+            }
+        }
 }

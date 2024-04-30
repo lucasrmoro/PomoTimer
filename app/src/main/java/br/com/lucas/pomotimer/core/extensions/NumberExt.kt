@@ -5,8 +5,14 @@ import java.util.concurrent.TimeUnit
 /**
  * Integer
  */
+val Int.Companion.MINUS_ONE
+    get() = -1
+
 val Int.Companion.ZERO
     get() = 0
+
+val Int.Companion.ONE
+    get() = 1
 
 val Int.Companion.NINE
     get() = 9
@@ -56,7 +62,7 @@ val Long.Companion.TWENTY_FIVE_MINUTES_IN_MILLIS
  * */
 
 val Float.Companion.ZERO
-    get() = 0f
+    get() = 0.0f
 
 val Float.Companion.ONE
     get() = 1f

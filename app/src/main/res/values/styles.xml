@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="DefaultGuideline">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="DefaultGuidelineStart" parent="DefaultGuideline">
+        <item name="android:orientation">vertical</item>
+        <item name="layout_constraintGuide_begin">@dimen/default_dimen</item>
+    </style>
+
+    <style name="DefaultGuidelineTop" parent="DefaultGuidelineStart">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="DefaultGuidelineEnd" parent="DefaultGuideline">
+        <item name="android:orientation">vertical</item>
+        <item name="layout_constraintGuide_end">@dimen/default_dimen</item>
+    </style>
+
+    <style name="DefaultGuidelineBottom" parent="DefaultGuidelineEnd">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="RoundedMaterialCardView">
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardCornerRadius">@dimen/small_dimen</item>
+        <item name="cardElevation">@dimen/tiniest_dimen</item>
+        <item name="android:theme">@style/Theme.MaterialComponents</item>
+    </style>
+
+    <style name="Picker" parent="Theme.MaterialComponents">
+        <item name="colorAccent">@android:color/holo_red_dark</item>
+        <item name="colorControlNormal">@android:color/transparent</item>
+        <item name="android:textSize">50sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+</resources>

@@ -9,10 +9,12 @@ import androidx.annotation.CallSuper
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
+import br.com.lucas.pomotimer.core.base.bottomSheet.BaseBottomSheetDialogFragment
 import java.lang.reflect.ParameterizedType
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -56,13 +58,22 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel>(
     open fun setupListeners() {}
     open fun setupCollectors() {}
 
+    protected fun dismissBottomSheet() {
+        parentFragmentManager.findFragmentByTag(BaseBottomSheetDialogFragment.TAG)?.let {
+            parentFragmentManager.beginTransaction().remove(it).commit()
+        }
+    }
+
     protected fun showToast(@StringRes message: Int, duration: Int = Toast.LENGTH_SHORT) {
         context?.let {
             Toast.makeText(it, getString(message), duration).show()
         }
     }
 
-    protected fun <T> StateFlow<T>.collectLifecycleAware(block: T.() -> Unit) {
+    protected fun <T> StateFlow<T>.collectLifecycleAware(
+        lifecycleScope: LifecycleCoroutineScope = this@BaseFragment.lifecycleScope,
+        block: T.() -> Unit
+    ) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 collect(block)
